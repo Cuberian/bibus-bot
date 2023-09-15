@@ -48,7 +48,7 @@ theme: /
                                 $session.money -= 10;
                                 $reactions.answer("Поздравляю с покупкой! теперь у вас осталось " + $session.money + " монет!")
                                 $reactions.answer("Пойти дальше?")
-                                $reactions.transition("../Continue")
+                                $reactions.transition({value: "../Continue", deferred: true})
                             }
                      
                         state: AgreeLotery:
