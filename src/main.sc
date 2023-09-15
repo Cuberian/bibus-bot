@@ -39,34 +39,34 @@ theme: /
                         intent: /BuySword
                         a: Хотите купить меч?
                         
-                        state: Yes:
-                            q:  * *(да|~дать)* *
-                            script:
-                                if($session.money - 10 < 0)
-                                {
-                                    $reactions.answer("вы не можете купить этот меч, но хотите испытать удачу? я приумножу ваши деньги на рандомное число, что скажите?")
-                                    $reactions.transition("../AgreeLotery");
-                                }
-                                else 
-                                {
-                                    $session.money -= 10;
-                                    $reactions.answer("Поздравляю с покупкой! теперь у вас осталось " + $session.money + " монет!")
-                                }
+                        # state: Yes:
+                    #         q:  * *(да|~дать)* *
+                    #         script:
+                    #             if($session.money - 10 < 0)
+                    #             {
+                    #                 $reactions.answer("вы не можете купить этот меч, но хотите испытать удачу? я приумножу ваши деньги на рандомное число, что скажите?")
+                    #                 $reactions.transition("../AgreeLotery");
+                    #             }
+                    #             else 
+                    #             {
+                    #                 $session.money -= 10;
+                    #                 $reactions.answer("Поздравляю с покупкой! теперь у вас осталось " + $session.money + " монет!")
+                    #             }
                  
-                    state: AgreeLotery:
-                        q: * *(да|~дать)* *
-                        script:
-                            $session.money *= getRandomInt(10)
-                            $reactions.answer("У вас теперь " + $session.money + " монет!")
+                    # state: AgreeLotery:
+                    #     q: * *(да|~дать)* *
+                    #     script:
+                    #         $session.money *= getRandomInt(10)
+                    #         $reactions.answer("У вас теперь " + $session.money + " монет!")
                             
-                            if($session.money - 10 >= 0)
-                            {
-                                $reactions.transition("/BuySword");
-                            }
-                            else 
-                            {
-                                $reactions.answer("Вам все равно не хватает!")
-                            }
+                    #         if($session.money - 10 >= 0)
+                    #         {
+                    #             $reactions.transition("/BuySword");
+                    #         }
+                    #         else 
+                    #         {
+                    #             $reactions.answer("Вам все равно не хватает!")
+                    #         }
                     
         state: NoMelon
             event: noMatch
