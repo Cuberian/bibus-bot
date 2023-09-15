@@ -31,14 +31,11 @@ theme: /
                 state: OpenChest:
                     q: * (~открывать|~вскрывать) *
                     script:
-                        $session.money = getRandomInt(10);
+                        $session.money = getRandomInt(0);
                         $reactions.answer("Вы получили " + $session.money + " монет!");
                     a: Хотите купить меч?
                     
-                    state: Cancel:
-                        q: * *(~нет|~идти|~проходить|~возвращаться)* *
-                        go!: ../../Continue
-                        
+
                     state: BuySword:
                         q: * *(да|~дать)* *
                         script:
@@ -62,17 +59,17 @@ theme: /
                                 if($session.money - 10 >= 0)
                                 {
                                     $reactions.answer("Хотите купить меч?")
-                                    $reactions.transition("../");
+                                    $reactions.transition("../../Continue");
                                 }
                                 else 
                                 {
-                                    $reactions.answer("Вам все равно не хватает!")
-                                    $reactions.transition("../../../Continue")
+                                    $reactions.answer("Вам все равно не хватает(")
+                                    $temp.nextState
                                 }
                 
-                state: Continue:
-                    q: * *(~идти|~проходить|~возвращаться)* *
-                    a: Ваше путешествие продолжается...
+                    state: Continue:
+                        q: * *(~идти|~проходить|~возвращаться)* *
+                        a: Ваше путешествие продолжается...
                     
         state: NoMelon
             event: noMatch
