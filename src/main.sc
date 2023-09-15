@@ -1,3 +1,4 @@
+require: functions.js
 require: slotfilling/slotFilling.sc
   module = sys.zb-common
 
@@ -11,6 +12,22 @@ theme: /
             q: melon
             a: Перед тобой три коридора, в какой пойдешь?
         
+        state: GoLeft:
+            q: * *лев* *
+            a: Тебя съел дракон!
+        
+        state: GoRight:
+            q: * *прав* *
+            a: Разрабы - дауны и не придумали эту сюжетную ветку(
+        
+        state: GoStraight:
+            q: * *прям* *
+            a: Перед вами сундук. Что будете делать?
+            
+            state: OpenChest:
+                q: * (~открыть|~вскрыть|~взломать) *
+                a: Вы получили {{ getRandomInt(10) }} залота!
+                
         state: NoMelon
             event: noMatch
             a: На эльфийском...
