@@ -29,8 +29,25 @@ theme: /
             a: Перед вами сундук. Что будете делать?
             
             state: OpenChest:
-                intent!: /open
-                a: Bye bye
+                q: * *кр* *
+                script:
+                    $session.money = getRandomInt(10); 
+                    $reactions.answer("Вы получили " + $session.money + "монет!")
+                a: Хотите купить меч за 10 монет?
+                
+                state:BuySword:
+                    q: * *(да|~покупать)* *
+                    script:
+                        if($session.money - 10 <= 0)
+                        {
+                            $reactions.answer("вы не можете купить этот меч, но хотите испытать удачу? я приумножу ваши деньги на рандомное число, что скажите?")
+                            return;
+                        }
+                        else 
+                        {
+                            $session.money -= 10; 
+                            $reactions.answer("Поздравляю с покупкой! теперь у вас " + $session.money + " монет!")
+                        }
                 
         state: NoMelon
             event: noMatch
