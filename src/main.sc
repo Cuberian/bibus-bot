@@ -35,8 +35,9 @@ theme: /
                     $reactions.answer("Вы получили " + $session.money + " монет!")
                     $reactions.transition("./BuySword")
                     
-                state:BuySword:
+                state: BuySword:
                     a: Хотите купить меч за 10 монет?
+                    
                     state: Yes
                         q: * *(да|~покупать)* *
                         script:
