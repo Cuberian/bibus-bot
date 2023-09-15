@@ -37,9 +37,8 @@ theme: /
                         $reactions.transition("./BuySword")
                         
                     state: BuySword:
-                        
                         state: Yes
-                            q: * *(да|~покупать)* *
+                            intent: /Yes
                             script:
                                 if($session.money - 10 < 0)
                                 {
