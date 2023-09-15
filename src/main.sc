@@ -31,14 +31,14 @@ theme: /
                 state: OpenChest:
                     q: * (~открывать|~вскрывать) *
                     script:
-                        $session.money = getRandomInt(10); 
-                        $reactions.answer("Вы получили " + $session.money + " монет!")
-                        $reactions.answer("Хотите купить меч?")
-                        $reactions.transition("./BuySword")
-                        
+                        $session.money = getRandomInt(10);
+                        $reactions.answer("Вы получили " + $session.money + " монет!");
+                        $reactions.answer("Хотите купить меч?");
+                        $reactions.transition("./BuySword");
+                    
                     state: BuySword:
                         state: Yes
-                            intent: /Yes
+                            q: да
                             script:
                                 if($session.money - 10 < 0)
                                 {
@@ -50,7 +50,7 @@ theme: /
                                     $session.money -= 10;
                                     $reactions.answer("Поздравляю с покупкой! теперь у вас осталось " + $session.money + " монет!")
                                 }
-                        
+                 
                     state: AgreeLotery
                         state: Yes
                             q: * *(да|~дать)* *
