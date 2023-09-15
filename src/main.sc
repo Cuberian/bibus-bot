@@ -25,8 +25,8 @@ theme: /
             a: Перед вами сундук. Что будете делать?
             
             state: OpenChest:
-                q: * (~открыть/~вскрыть/~взломать) *
-                a: Вы получили {{ getRandomInt(10) }} залота!
+                intent!: /open
+                a: Bye bye
                 
         state: NoMelon
             event: noMatch
