@@ -14,7 +14,11 @@ theme: /
         
         state: GoLeft:
             q: * *лев* *
-            a: Тебя съел дракон!
+            a: Тебя съел дракон! Не хотите сыграть снова?
+            
+            state: PlayAgain:
+                q: да
+                go!: ../Start
         
         state: GoRight:
             q: * *прав* *
