@@ -36,7 +36,8 @@ theme: /
                         $reactions.transition("../BuySword")
                         
                 state: BuySword:
-                    a: Хотите купить меч?
+                    script:
+                        $reactions.answer("Хотите купить меч?")
                     
                     state: Yes:
                         q:  * *(да|~дать)* *
