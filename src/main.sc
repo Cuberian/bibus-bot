@@ -59,7 +59,7 @@ theme: /
                                 if($session.money - 10 >= 0)
                                 {
                                     $reactions.answer("Хотите купить меч?")
-                                    $reactions.transition("../../Continue");
+                                    $reactions.transition({value: "../../Continue", deferred: true});
                                 }
                                 else 
                                 {
