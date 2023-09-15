@@ -9,7 +9,7 @@ theme: /
         a: Молви, друг, и войди!
         
         state: Melon
-            q: melon
+            q: * (melon|мелон) *
             a: Перед тобой три коридора, в какой пойдешь?
         
         state: GoLeft:
