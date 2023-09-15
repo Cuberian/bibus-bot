@@ -33,7 +33,7 @@ theme: /
                     script:
                         $session.money = getRandomInt(10); 
                         $reactions.answer("Вы получили " + $session.money + " монет!")
-                        $reactions.transition("/Start/Melon/GoStraight/OpenChest/BuySword")
+                        $reactions.transition("./BuySword")
                         
                     state: BuySword:
                         
