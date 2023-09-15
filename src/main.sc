@@ -32,8 +32,7 @@ theme: /
                     q: * (~открывать|~вскрывать) *
                     script:
                         $session.money = getRandomInt(10);
-                        $reactions.answer("Вы получили " + $session.money + " монет!");
-                        $reactions.transition("./BuySword");
+                        $reactions.answer("Вы получили " + $session.money + " монет!");;
                     
                     state: BuySword:
                         a: Хотите купить меч?
@@ -52,20 +51,20 @@ theme: /
                                     $reactions.answer("Поздравляю с покупкой! теперь у вас осталось " + $session.money + " монет!")
                                 }
                  
-                    state: AgreeLotery:
-                        q: * *(да|~дать)* *
-                        script:
-                            $session.money *= getRandomInt(10)
-                            $reactions.answer("У вас теперь " + $session.money + " монет!")
-                            
-                            if($session.money - 10 >= 0)
-                            {
-                                $reactions.transition("/BuySword");
-                            }
-                            else 
-                            {
-                                $reactions.answer("Вам все равно не хватает!")
-                            }
+                        state: AgreeLotery:
+                            q: * *(да|~дать)* *
+                            script:
+                                $session.money *= getRandomInt(10)
+                                $reactions.answer("У вас теперь " + $session.money + " монет!")
+                                
+                                if($session.money - 10 >= 0)
+                                {
+                                    $reactions.transition("/BuySword");
+                                }
+                                else 
+                                {
+                                    $reactions.answer("Вам все равно не хватает!")
+                                }
                     
         state: NoMelon
             event: noMatch
