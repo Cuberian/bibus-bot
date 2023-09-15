@@ -47,7 +47,6 @@ theme: /
                             {
                                 $session.money -= 10;
                                 $reactions.answer("Поздравляю с покупкой! теперь у вас осталось " + $session.money + " монет!")
-                                $reactions.answer("Пойти дальше?")
                                 $reactions.transition({value: "../Continue", deferred: true})
                             }
                      
@@ -65,12 +64,10 @@ theme: /
                                 else 
                                 {
                                     $reactions.answer("Вам все равно не хватает(")
-                                    $reactions.answer("Пойти дальше?")
                                     $reactions.transition({value: "../../Continue", deferred: true});
                                 }
                 
                     state: Continue:
-                        q: * *(пойти|~идти|~проходить|~возвращаться)* *
                         a: Ваше путешествие продолжается...
                     
         state: NoMelon
