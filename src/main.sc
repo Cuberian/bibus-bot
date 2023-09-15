@@ -33,10 +33,12 @@ theme: /
                     script:
                         $session.money = getRandomInt(10);
                         $reactions.answer("Вы получили " + $session.money + " монет!");
-                        $reactions.answer("Хотите купить меч?");
                         $reactions.transition("./BuySword");
                     
                     state: BuySword:
+                        intent: /BuySword
+                        a: Хотите купить меч?
+                        
                         state: Yes:
                             q:  * *(да|~дать)* *
                             script:
@@ -51,7 +53,7 @@ theme: /
                                     $reactions.answer("Поздравляю с покупкой! теперь у вас осталось " + $session.money + " монет!")
                                 }
                  
-                    state: AgreeLotery
+                    state: AgreeLotery:
                         q: * *(да|~дать)* *
                         script:
                             $session.money *= getRandomInt(10)
