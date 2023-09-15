@@ -33,7 +33,7 @@ theme: /
                 script:
                     $session.money = getRandomInt(10); 
                     $reactions.answer("Вы получили " + $session.money + " монет!")
-                    $reactions.transition("/BuySword")
+                    $reactions.transition("./BuySword")
                     
                 state:BuySword:
                     a: Хотите купить меч за 10 монет?
