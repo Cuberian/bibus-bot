@@ -33,9 +33,10 @@ theme: /
                     script:
                         $session.money = getRandomInt(10);
                         $reactions.answer("Вы получили " + $session.money + " монет!");;
-                        $reactions.transition("/Start/BuySword")
+                        $reactions.transition("/Start/BuySword/BuySword")
                         
         state: BuySword:
+            intent: /BuySword
             a: Хотите купить меч?
             
             state: Yes:
