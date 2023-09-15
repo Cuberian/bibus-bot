@@ -9,4 +9,4 @@ theme: /
     
     state: NoMatch
         event!: noMatch
-        a: Моя твоя не панимац!
+        a: Попробуйте сказать это на эльфийском
