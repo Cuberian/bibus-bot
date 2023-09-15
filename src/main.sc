@@ -31,7 +31,7 @@ theme: /
                 state: OpenChest:
                     q: * (~открывать|~вскрывать) *
                     script:
-                        $session.money = getRandomInt(0);
+                        $session.money = getRandomInt(10);
                         $reactions.answer("Вы получили " + $session.money + " монет!");
                     a: Хотите купить меч?
                     
@@ -47,7 +47,8 @@ theme: /
                             {
                                 $session.money -= 10;
                                 $reactions.answer("Поздравляю с покупкой! теперь у вас осталось " + $session.money + " монет!")
-                                $reactions.transition("../../Continue")
+                                $reactions.answer("Пойти дальше?")
+                                $reactions.transition("../Continue")
                             }
                      
                         state: AgreeLotery:
@@ -59,16 +60,17 @@ theme: /
                                 if($session.money - 10 >= 0)
                                 {
                                     $reactions.answer("Хотите купить меч?")
-                                    $reactions.transition({value: "../../Continue", deferred: true});
+                                    $reactions.transition({value: "../../BuySword", deferred: true});
                                 }
                                 else 
                                 {
                                     $reactions.answer("Вам все равно не хватает(")
-                                    $temp.nextState
+                                    $reactions.answer("Пойти дальше?")
+                                    $reactions.transition({value: "../../Continue", deferred: true});
                                 }
                 
                     state: Continue:
-                        q: * *(~идти|~проходить|~возвращаться)* *
+                        q: * *(пойти|~идти|~проходить|~возвращаться)* *
                         a: Ваше путешествие продолжается...
                     
         state: NoMelon
