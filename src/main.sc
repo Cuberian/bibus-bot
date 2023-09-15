@@ -54,7 +54,7 @@ theme: /
                             }
                      
                         state: AgreeLotery:
-                            q: * *(да|~дать)* *
+                            q: * *(да|~играть|~дать)* *
                             script:
                                 $session.money *= getRandomInt(10)
                                 $reactions.answer("У вас теперь " + $session.money + " монет!")
