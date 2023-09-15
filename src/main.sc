@@ -36,19 +36,20 @@ theme: /
                         $reactions.answer("Хотите купить меч?");
                         $reactions.transition("./BuySword");
                     
-                    state: BuySword
-                        q:  * *(да|~дать)* *
-                        script:
-                            if($session.money - 10 < 0)
-                            {
-                                $reactions.answer("вы не можете купить этот меч, но хотите испытать удачу? я приумножу ваши деньги на рандомное число, что скажите?")
-                                $reactions.transition("../../AgreeLotery");
-                            }
-                            else 
-                            {
-                                $session.money -= 10;
-                                $reactions.answer("Поздравляю с покупкой! теперь у вас осталось " + $session.money + " монет!")
-                            }
+                    state: BuySword:
+                        state: Yes:
+                            q:  * *(да|~дать)* *
+                            script:
+                                if($session.money - 10 < 0)
+                                {
+                                    $reactions.answer("вы не можете купить этот меч, но хотите испытать удачу? я приумножу ваши деньги на рандомное число, что скажите?")
+                                    $reactions.transition("../AgreeLotery");
+                                }
+                                else 
+                                {
+                                    $session.money -= 10;
+                                    $reactions.answer("Поздравляю с покупкой! теперь у вас осталось " + $session.money + " монет!")
+                                }
                  
                     state: AgreeLotery
                         q: * *(да|~дать)* *
