@@ -12,62 +12,62 @@ theme: /
             q: * (melon|мелон) *
             a: Перед тобой три коридора, в какой пойдешь?
         
-        state: GoLeft:
-            q: * *лев* *
-            a: Тебя съел дракон! Не хотите сыграть снова?
-            
-            state: PlayAgain:
-                q: да
-                go!: /Start
-        
-        state: GoRight:
-            q: * *прав* *
-            a: Разрабы - дауны и не придумали эту сюжетную ветку(
-        
-        state: GoStraight:
-            q: * *прям* *
-            a: Перед вами сундук. Что будете делать?
-            
-            state: OpenChest:
-                q: * *кр* *
-                script:
-                    $session.money = getRandomInt(10); 
-                    $reactions.answer("Вы получили " + $session.money + " монет!")
-                    $reactions.transition("./BuySword")
-                    
-                state: BuySword:
-                    a: Хотите купить меч за 10 монет?
-                    
-                    state: Yes
-                        q: * *(да|~покупать)* *
-                        script:
-                            if($session.money - 10 < 0)
-                            {
-                                $reactions.answer("вы не можете купить этот меч, но хотите испытать удачу? я приумножу ваши деньги на рандомное число, что скажите?")
-                                $reactions.transition("./AgreeLotery");
-                            }
-                            else 
-                            {
-                                $session.money -= 10;
-                                $reactions.answer("Поздравляю с покупкой! теперь у вас осталось " + $session.money + " монет!")
-                            }
-                    
-                        state: AgreeLotery
-                            state: Yes
-                                q: * *(да|~давай)* *
-                                script:
-                                    $session.money *= getRandomInt(10)
-                                    $reactions.answer("У вас теперь " + $session.money + " монет!")
-                                    
-                                    if($session.money - 10 >= 0)
-                                    {
-                                        $reactions.transition("/BuySword");
-                                    }
-                                    else 
-                                    {
-                                        $reactions.answer("Вам все равно не хватает!")
-                                    }
+            state: GoLeft:
+                q: * *лев* *
+                a: Тебя съел дракон! Не хотите сыграть снова?
                 
+                state: PlayAgain:
+                    q: да
+                    go!: /Start
+            
+            state: GoRight:
+                q: * *прав* *
+                a: Разрабы - дауны и не придумали эту сюжетную ветку(
+            
+            state: GoStraight:
+                q: * *прям* *
+                a: Перед вами сундук. Что будете делать?
+                
+                state: OpenChest:
+                    q: * (~открывать|~вскрывать) *
+                    script:
+                        $session.money = getRandomInt(10); 
+                        $reactions.answer("Вы получили " + $session.money + " монет!")
+                        $reactions.transition("/Start/Melon/GoStraight/OpenChest/BuySword")
+                        
+                    state: BuySword:
+                        a: Хотите купить меч за 10 монет?
+                        
+                        state: Yes
+                            q: * *(да|~покупать)* *
+                            script:
+                                if($session.money - 10 < 0)
+                                {
+                                    $reactions.answer("вы не можете купить этот меч, но хотите испытать удачу? я приумножу ваши деньги на рандомное число, что скажите?")
+                                    $reactions.transition("./AgreeLotery");
+                                }
+                                else 
+                                {
+                                    $session.money -= 10;
+                                    $reactions.answer("Поздравляю с покупкой! теперь у вас осталось " + $session.money + " монет!")
+                                }
+                        
+                            state: AgreeLotery
+                                state: Yes
+                                    q: * *(да|~дать)* *
+                                    script:
+                                        $session.money *= getRandomInt(10)
+                                        $reactions.answer("У вас теперь " + $session.money + " монет!")
+                                        
+                                        if($session.money - 10 >= 0)
+                                        {
+                                            $reactions.transition("/BuySword");
+                                        }
+                                        else 
+                                        {
+                                            $reactions.answer("Вам все равно не хватает!")
+                                        }
+                    
         state: NoMelon
             event: noMatch
             a: На эльфийском...
