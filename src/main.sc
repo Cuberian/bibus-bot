@@ -18,7 +18,7 @@ theme: /
             
             state: PlayAgain:
                 q: да
-                go!: ../Start
+                go!: ../../Start
         
         state: GoRight:
             q: * *прав* *
