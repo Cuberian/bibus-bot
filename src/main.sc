@@ -36,7 +36,7 @@ theme: /
                         $reactions.transition("./BuySword");
                     
                     state: BuySword:
-                        intent: /BuySword
+                        intent: /пока
                         a: Хотите купить меч?
                         
                         # state: Yes:
